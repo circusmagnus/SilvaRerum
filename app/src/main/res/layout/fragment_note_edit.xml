@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="pl.wojtach.silvarerum.NotesViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".NoteEditFragment">
+
+        <EditText
+            android:id="@+id/note_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:afterTextChanged="@{viewModel.afterTextChanged}"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="@string/your_note"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
+            android:text="@{viewModel.noteNewOrCached.content}"
+            tools:text="Piszę sobie co mnie skrobie" />
+
+    </ScrollView>
+
+</layout>

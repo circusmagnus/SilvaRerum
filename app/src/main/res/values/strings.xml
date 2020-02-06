@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Silva Rerum</string>
+
+    <string name="your_note">Twoja notatka</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
