@@ -5,12 +5,13 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import pl.wojtach.silvarerum.room.Note
-import pl.wojtach.silvarerum.room.NotesDao.Companion.getInstance as notesDao
+import pl.wojtach.silvarerum.room.NotesDao.Companion.getInstance as getNotesDao
 
 private typealias Notes = List<Note>
 
@@ -20,26 +21,32 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
         override fun afterTextChanged(text: String) {
             val newNote = noteNewOrCached.value?.takeUnless { it.content == text }?.copy(content = text) ?: return
             viewModelScope.launch {
-                notesDao(application).update(newNote)
+                getNotesDao(application).update(newNote)
             }
         }
     }
 
     val noteNewOrCached: LiveData<Note> = liveData {
-        notesDao(application).observeAllNotes().collect { notes ->
+        getNotesDao(application).observeAllNotes().collect { notes ->
             Log.d(this@NotesViewModel::class.java.simpleName, "new notes emission: $notes")
-            if (notes.isEmpty()) Note(content = "").let { note -> notesDao(application).insert(note) }
+            if (notes.isEmpty()) Note(content = "").let { note -> getNotesDao(application).insert(note) }
             else emit(notes.first())
         }
     }
 
     val notes: LiveData<Notes> = liveData {
-        notesDao(application).observeAllNotes().collect { notes ->
+        getNotesDao(application).observeAllNotes().collect { notes ->
             emit(notes)
         }
     }
 
+    private val _activeNoteId: MutableLiveData<Long?> = MutableLiveData(null)
+
+    val activeNoteId: LiveData<Long?> get() = _activeNoteId
+
     val addNote: View.OnClickListener = View.OnClickListener {
-        viewModelScope.launch { notesDao(application).insert(Note(content = "")) }
+        viewModelScope.launch {
+            _activeNoteId.value = getNotesDao(application).insert(Note(content = ""))
+        }
     }
 }
