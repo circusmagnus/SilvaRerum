@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import pl.wojtach.silvarerum.alternative.NotesViewModel
 import pl.wojtach.silvarerum.databinding.FragmentNoteEditBinding
 
 class NoteEditFragment : Fragment() {

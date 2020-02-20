@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/headline"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/text_margin"
+        android:ellipsize="end"
+        android:maxLines="4"
+        android:textAppearance="?attr/textAppearanceListItem"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/buttons_separator"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Zajawka notatki bardzo długa bardzo długa bardzo długa bardzo długa bardzo długa Zajawka notatki bardzo długa bardzo długa bardzo długa bardzo długa bardzo długa Zajawka notatki bardzo długa bardzo długa bardzo długa bardzo długa bardzo długa Zajawka notatki bardzo długa bardzo długa bardzo długa bardzo długa bardzo długa Zajawka notatki bardzo długa bardzo długa bardzo długa bardzo długa bardzo długa Zajawka notatki bardzo długa bardzo długa bardzo długa bardzo długa bardzo długa Zajawka notatki bardzo długa bardzo długa bardzo długa bardzo długa bardzo długa" />
+
+    <ImageButton
+        android:id="@+id/edit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="edit button"
+        app:layout_constraintBottom_toTopOf="@+id/delete_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/buttons_separator"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_edit" />
+
+    <ImageButton
+        android:id="@+id/delete_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="delete button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/buttons_separator"
+        app:layout_constraintTop_toBottomOf="@+id/edit_button"
+        app:srcCompat="@android:drawable/ic_menu_delete" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/buttons_separator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="start"
+        app:constraint_referenced_ids="edit_button,delete_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

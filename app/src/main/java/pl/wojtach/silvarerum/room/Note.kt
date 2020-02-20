@@ -16,8 +16,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import pl.wojtach.silvarerum.LazyAsync
 
-@Entity(tableName = Note.TABLE_NAME)
-data class Note(
+@Entity(tableName = NoteData.TABLE_NAME)
+data class NoteData(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val content: String
 ) {
@@ -30,26 +30,32 @@ data class Note(
 interface NotesDao {
 
     @Insert
-    suspend fun insert(note: Note): Long
+    suspend fun insert(note: NoteData): Long
 
     @Update
-    suspend fun update(note: Note)
+    suspend fun update(note: NoteData)
 
     @Delete
-    suspend fun delete(note: Note)
+    suspend fun delete(note: NoteData)
 
-    @Query("SELECT * FROM ${Note.TABLE_NAME}")
-    fun observeAllNotes(): Flow<List<Note>>
+    @Query("SELECT * FROM ${NoteData.TABLE_NAME}")
+    fun observeAllNotes(): Flow<List<NoteData>>
 
-    @Query("SELECT * FROM ${Note.TABLE_NAME} WHERE id = :id")
-    fun observeNote(id: Long): Flow<Note>
+    @Query("SELECT * FROM ${NoteData.TABLE_NAME} WHERE id = :id")
+    fun observeNote(id: Long): Flow<NoteData>
+
+    @Query("SELECT 'id' FROM ${NoteData.TABLE_NAME}")
+    suspend fun getNote(id: Long): NoteData
+
+    @Query("SELECT 'id' FROM ${NoteData.TABLE_NAME}")
+    fun observeNoteIds(): Flow<List<Long>>
 
     companion object {
         suspend fun getInstance(appContext: Context) = NotesDb.getInstance(appContext).notesDao()
     }
 }
 
-@Database(entities = [Note::class], version = 1)
+@Database(entities = [NoteData::class], version = 1)
 abstract class NotesDb : RoomDatabase() {
     abstract fun notesDao(): NotesDao
 

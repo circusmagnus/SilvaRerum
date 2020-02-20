@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="pl.wojtach.silvarerum.NotesViewModel" />
+            type="pl.wojtach.silvarerum.alternative.NotesViewModel" />
     </data>
 
     <ScrollView

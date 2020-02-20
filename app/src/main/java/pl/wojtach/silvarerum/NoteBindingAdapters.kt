@@ -6,9 +6,7 @@ import android.widget.EditText
 import androidx.databinding.BindingAdapter
 import androidx.databinding.adapters.ListenerUtil
 
-interface SimpleTextWatcher {
-    fun afterTextChanged(text: String)
-}
+typealias SimpleTextWatcher = (String) -> Unit
 
 @BindingAdapter("android:afterTextChanged")
 fun setAfterTextListener(editText: EditText, listener: SimpleTextWatcher) {
@@ -18,7 +16,7 @@ fun setAfterTextListener(editText: EditText, listener: SimpleTextWatcher) {
         var currentText: String = editText.text.toString()
             set(value) {
                 if (field != value) {
-                    listener.afterTextChanged(value)
+                    listener(value)
                     field = value
                 }
             }
