@@ -8,13 +8,13 @@
 
         <variable
             name="viewModel"
-            type="pl.wojtach.silvarerum.alternative.NotesViewModel" />
+            type="pl.wojtach.silvarerum.note.SingleNoteViewModel" />
     </data>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".NoteEditFragment">
+        tools:context=".note.NoteEditFragment">
 
         <EditText
             android:id="@+id/note_content"
@@ -24,13 +24,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:afterTextChanged="@{viewModel.afterTextChanged}"
+            android:afterTextChanged="@{viewModel.changeListener}"
             android:ems="10"
             android:gravity="start|top"
             android:hint="@string/your_note"
             android:importantForAutofill="no"
             android:inputType="textMultiLine"
-            android:text="@{viewModel.noteNewOrCached.content}"
+            android:text="@{viewModel.data.content}"
             tools:text="Piszę sobie co mnie skrobie" />
 
     </ScrollView>

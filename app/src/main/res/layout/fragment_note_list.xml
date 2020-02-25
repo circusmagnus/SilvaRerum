@@ -10,5 +10,5 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".NotesListFragment"
-    tools:listitem="@layout/fragment_note_list_item" />
+    tools:context=".notes.NotesListFragment"
+    tools:listitem="@layout/note_list_item" />
