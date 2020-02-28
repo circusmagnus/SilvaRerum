@@ -27,9 +27,9 @@ class BindingListAdapter<T, C>(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(position)
+        val model = getItem(position).data
         with(holder.binding) {
-            setVariable(BR.model, item)
+            setVariable(BR.model, model)
             executePendingBindings()
         }
     }
