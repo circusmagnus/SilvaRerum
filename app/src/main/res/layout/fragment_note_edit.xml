@@ -2,6 +2,7 @@
 
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -24,13 +25,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:afterTextChanged="@{viewModel.changeListener}"
             android:ems="10"
             android:gravity="start|top"
             android:hint="@string/your_note"
             android:importantForAutofill="no"
             android:inputType="textMultiLine"
             android:text="@{viewModel.data.content}"
+            app:afterTextChanged="@{viewModel.changeListener}"
             tools:text="Piszę sobie co mnie skrobie" />
 
     </ScrollView>

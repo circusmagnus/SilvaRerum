@@ -6,38 +6,42 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.RecyclerView
 import pl.wojtach.silvarerum.NoteData
-import pl.wojtach.silvarerum.R
+import pl.wojtach.silvarerum.databinding.FragmentNoteListBinding
+import pl.wojtach.silvarerum.views.BindingListAdapter
 
 class NotesListFragment : Fragment() {
 
-    val viewModel: NotesViewModel by viewModels()
+    val notesViewModel: NotesViewModel by viewModels()
 
     val addNewNoteListener = View.OnClickListener {
-        viewModel.addNewNote()
+        notesViewModel.addNewNote()
     }
 
-    val deleteNoteListener = View.OnClickListener { view ->
-        val toDelete = view.tag as NoteData
-        viewModel.delete(toDelete)
-    }
+    val onDeleteListener = { noteData: NoteData -> notesViewModel.delete(noteData) }
+    val onEditListener = { noteData: NoteData -> /* navigate */ }
+    val onClickListener = { noteData: NoteData -> /* navigate */ }
+
+    val adapter = BindingListAdapter(NoteDiffCalc, this)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val recyclerView = inflater.inflate(R.layout.fragment_note_list, container, false)
+        val binding = FragmentNoteListBinding.inflate(inflater, container, false)
 
-        if (recyclerView is RecyclerView) {
-            with(recyclerView) {
-                adapter = NotesRecyclerViewAdapter(
-                    onDelete = { noteData -> viewModel.delete(noteData) },
-                    onEdit = { noteData -> /* navigate */ }
-                )
-            }
+        with(binding) {
+            //            list.adapter = NotesRecyclerViewAdapter(
+//                onDelete = { noteData -> viewModel.delete(noteData) },
+//                onEdit = { noteData -> /* navigate */ },
+//                onClick = { noteData -> /* navigate */ }
+//            )
+            controller = this@NotesListFragment
+            viewModel = notesViewModel
+            lifecycleOwner = viewLifecycleOwner
         }
-        return view
+
+        return binding.root
     }
 
     companion object {

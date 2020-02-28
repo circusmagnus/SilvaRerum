@@ -5,15 +5,28 @@ import android.text.TextWatcher
 import android.widget.EditText
 import androidx.databinding.BindingAdapter
 import androidx.databinding.adapters.ListenerUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+
+//@BindingAdapter("listData")
+//fun <T, VH: RecyclerView.ViewHolder> RecyclerView.setData(data: List<T>?) {
+//    (this.adapter as ListAdapter<T, VH>).submitList(data ?: emptyList())
+//}
+
+@BindingAdapter("adapter", "listData")
+fun <T, VH : RecyclerView.ViewHolder> RecyclerView.setListAdapter(adapter: ListAdapter<T, VH>, data: List<T>?) {
+    this.adapter = adapter
+    adapter.submitList(data)
+}
 
 typealias SimpleTextWatcher = (String) -> Unit
 
-@BindingAdapter("android:afterTextChanged")
-fun setAfterTextListener(editText: EditText, listener: SimpleTextWatcher) {
+@BindingAdapter("afterTextChanged")
+fun EditText.setAfterTextListener(listener: SimpleTextWatcher) {
 
     val new: TextWatcher? = object : TextWatcher {
 
-        var currentText: String = editText.text.toString()
+        var currentText: String = this@setAfterTextListener.text.toString()
             set(value) {
                 if (field != value) {
                     listener(value)
@@ -32,8 +45,8 @@ fun setAfterTextListener(editText: EditText, listener: SimpleTextWatcher) {
         }
     }
 
-    val old = ListenerUtil.trackListener(editText, new, R.id.textWatcher)
+    val old = ListenerUtil.trackListener(this, new, R.id.textWatcher)
 
-    old?.let { editText.removeTextChangedListener(old) }
-    new?.let { editText.addTextChangedListener(new) }
+    old?.let { this.removeTextChangedListener(old) }
+    new?.let { this.addTextChangedListener(new) }
 }

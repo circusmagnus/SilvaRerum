@@ -8,12 +8,12 @@
     <data>
 
         <variable
-            name="note"
+            name="model"
             type="pl.wojtach.silvarerum.NoteData" />
 
         <variable
             name="controller"
-            type="pl.wojtach.silvarerum.notes.NotesRecyclerViewAdapter" />
+            type="pl.wojtach.silvarerum.notes.NotesListFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,8 +29,8 @@
             android:ellipsize="end"
             android:maxLines="4"
             android:textAppearance="?attr/textAppearanceListItem"
-            android:text="@{note.content}"
-            android:tag="@{note}"
+            android:text="@{model.content}"
+            android:onClick="@{() -> controller.onClickListener.invoke(model)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/buttons_separator"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +44,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:contentDescription="edit button"
-            android:onClick="@{() -> controller.onEdit.invoke(note)}"
+            android:onClick="@{() -> controller.onEditListener.invoke(model)}"
             app:layout_constraintBottom_toTopOf="@+id/delete_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/buttons_separator"
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:contentDescription="delete button"
-            android:onClick="@{() -> controller.onDelete.invoke(note)}"
+            android:onClick="@{() -> controller.onDeleteListener.invoke(model)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/buttons_separator"
