@@ -1,7 +1,7 @@
 package pl.wojtach.silvarerum.notes
 
 import androidx.recyclerview.widget.DiffUtil
-import pl.wojtach.silvarerum.NoteData
+import pl.wojtach.silvarerum.room.NoteData
 import pl.wojtach.silvarerum.views.BindingListAdapter.ListItem
 
 object NoteDiffCalc : DiffUtil.ItemCallback<ListItem<NoteData>>() {

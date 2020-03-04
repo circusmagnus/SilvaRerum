@@ -7,8 +7,6 @@ import androidx.room.RoomDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import pl.wojtach.silvarerum.LazyAsync
-import pl.wojtach.silvarerum.NoteData
-import pl.wojtach.silvarerum.NotesDao
 
 @Database(entities = [NoteData::class], version = 1)
 abstract class NotesDb : RoomDatabase() {

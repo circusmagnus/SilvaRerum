@@ -9,9 +9,9 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import pl.wojtach.silvarerum.NoteData
-import pl.wojtach.silvarerum.NotesDao
 import pl.wojtach.silvarerum.R
+import pl.wojtach.silvarerum.room.NoteData
+import pl.wojtach.silvarerum.room.NotesDao
 import pl.wojtach.silvarerum.views.BindingListAdapter
 
 class NotesViewModel(application: Application) : AndroidViewModel(application) {

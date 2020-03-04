@@ -1,4 +1,4 @@
-package pl.wojtach.silvarerum
+package pl.wojtach.silvarerum.room
 
 import android.content.Context
 import androidx.room.Dao
@@ -9,7 +9,6 @@ import androidx.room.PrimaryKey
 import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
-import pl.wojtach.silvarerum.room.NotesDb
 
 @Entity(tableName = NoteData.TABLE_NAME)
 data class NoteData(

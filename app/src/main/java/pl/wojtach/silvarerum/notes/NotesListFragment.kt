@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import pl.wojtach.silvarerum.NoteData
 import pl.wojtach.silvarerum.databinding.FragmentNoteListBinding
+import pl.wojtach.silvarerum.room.NoteData
 import pl.wojtach.silvarerum.views.BindingListAdapter
 
 class NotesListFragment : Fragment() {

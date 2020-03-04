@@ -11,9 +11,9 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
-import pl.wojtach.silvarerum.NoteData
-import pl.wojtach.silvarerum.NotesDao
 import pl.wojtach.silvarerum.SimpleTextWatcher
+import pl.wojtach.silvarerum.room.NoteData
+import pl.wojtach.silvarerum.room.NotesDao
 
 class SingleNoteViewModel(application: Application, private val noteId: Long) : AndroidViewModel(application) {
 
