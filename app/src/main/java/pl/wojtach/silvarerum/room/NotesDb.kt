@@ -17,11 +17,7 @@ abstract class NotesDb : RoomDatabase() {
     companion object : LazyAsync<Context, NotesDb>({ appContext ->
         val dbName = "notes_db"
         withContext(Dispatchers.Default) {
-            Room.databaseBuilder(
-                appContext,
-                NotesDb::class.java,
-                dbName
-            ).build()
+            Room.databaseBuilder(appContext, NotesDb::class.java, dbName).build()
         }
     })
 }

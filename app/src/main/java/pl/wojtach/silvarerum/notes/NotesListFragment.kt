@@ -6,21 +6,30 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import pl.wojtach.silvarerum.NoteData
 import pl.wojtach.silvarerum.databinding.FragmentNoteListBinding
 import pl.wojtach.silvarerum.views.BindingListAdapter
 
 class NotesListFragment : Fragment() {
 
-    val notesViewModel: NotesViewModel by viewModels()
+    private val notesViewModel: NotesViewModel by viewModels()
 
     val addNewNoteListener = View.OnClickListener {
         notesViewModel.addNewNote()
     }
 
     val onDeleteListener = { noteData: NoteData -> notesViewModel.delete(noteData) }
-    val onEditListener = { noteData: NoteData -> /* navigate */ }
-    val onClickListener = { noteData: NoteData -> /* navigate */ }
+
+    val onEditListener = { noteData: NoteData ->
+        val direction = NotesListFragmentDirections.actionNotesListFragmentToNoteEditFragment2(noteData.id)
+        findNavController().navigate(direction)
+    }
+
+    val onClickListener = { noteData: NoteData ->
+        val direction = NotesListFragmentDirections.actionNotesListFragmentToNoteViewFragment(noteData.id)
+        findNavController().navigate(direction)
+    }
 
     val adapter = BindingListAdapter(NoteDiffCalc, this)
 
@@ -31,11 +40,6 @@ class NotesListFragment : Fragment() {
         val binding = FragmentNoteListBinding.inflate(inflater, container, false)
 
         with(binding) {
-            //            list.adapter = NotesRecyclerViewAdapter(
-//                onDelete = { noteData -> viewModel.delete(noteData) },
-//                onEdit = { noteData -> /* navigate */ },
-//                onClick = { noteData -> /* navigate */ }
-//            )
             controller = this@NotesListFragment
             viewModel = notesViewModel
             lifecycleOwner = viewLifecycleOwner
