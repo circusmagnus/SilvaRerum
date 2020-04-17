@@ -32,7 +32,7 @@ interface NotesDao {
     @Delete
     suspend fun delete(note: NoteData)
 
-    @Query("SELECT * FROM ${NoteData.TABLE_NAME}")
+    @Query("SELECT * FROM ${NoteData.TABLE_NAME} ORDER BY id DESC")
     fun observeAllNotes(): Flow<List<NoteData>>
 
     @Query("SELECT * FROM ${NoteData.TABLE_NAME} WHERE id = :id")
