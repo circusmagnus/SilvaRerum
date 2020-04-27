@@ -32,13 +32,16 @@ class NoteEditFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.action_delete -> {
+        R.id.action_delete    -> {
             viewModel.deleteNote()
             val direction = NoteEditFragmentDirections.actionNoteEditFragmentToNotesListFragment()
             findNavController().navigate(direction)
             true
         }
-        else               -> false
+        R.id.action_set_alarm -> {
+            true
+        }
+        else                  -> false
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
